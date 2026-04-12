@@ -1,0 +1,14 @@
+# Typical folders you usually do not want Graphify to index
+node_modules/
+dist/
+build/
+coverage/
+.next/
+.cache/
+venv/
+.venv/
+vendor/
+.graphify-out/
+graphify-out/cache/
+*.min.js
+*.map

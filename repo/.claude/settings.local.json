@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(python3 .claude/scripts/save_note.py *)",
+      "Bash(obsidian *)"
+    ]
+  },
+  "hooks": {
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/create_session_summary.py",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "vault_name": "__VAULT_NAME__",
+  "project_name": "__PROJECT_NAME__",
+  "folders": {
+    "session_summaries": "00 Inbox/Session Summaries",
+    "research": "01 Projects/__PROJECT_NAME__/Research",
+    "decisions": "01 Projects/__PROJECT_NAME__/Decisions",
+    "snippets": "01 Projects/__PROJECT_NAME__/Snippets"
+  },
+  "daily_note_enabled": true
+}
