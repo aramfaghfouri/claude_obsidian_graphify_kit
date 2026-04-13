@@ -23,10 +23,10 @@ def main() -> int:
     daily_note_enabled = config.get("daily_note_enabled", False)
 
     now = datetime.now()
-    timestamp = now.strftime("%Y-%m-%d %H%M%S")
-    created = now.strftime("%Y-%m-%d %H:%M:%S")
-    note_name = f"{timestamp} {project_name} session.md"
-    note_stem = note_name[:-3]
+    file_stamp = now.strftime("%Y-%m-%d %H%M%S")
+    title_stamp = now.strftime("%Y-%m-%d %H:%M:%S")
+    created = now.strftime("%Y-%m-%d %H:%M")
+    note_name = f"{file_stamp} {project_name} session.md"
     note_path = f"{summary_folder}/{note_name}"
 
     cwd = payload.get("cwd", "")
@@ -49,7 +49,7 @@ tags:
   - ai/claude
 ---
 
-# {now.strftime("%Y-%m-%d %H:%M:%S")} Session Summary
+# {title_stamp} Session Summary
 
 ## What I worked on
 
@@ -73,11 +73,11 @@ tags:
         f"vault={vault_name}",
         "create",
         f"path={note_path}",
-        f"content={content}"
+        f"content={content}",
     ])
 
     if daily_note_enabled:
-        daily_line = f"- Session ended for [[{note_stem}]] (reason: {reason})\n"
+        daily_line = f"- Session ended for [[{note_name[:-3]}]] (reason: {reason})\n"
         run_obsidian([
             f"vault={vault_name}",
             "daily:append",

@@ -1,14 +1,13 @@
-# Typical folders you usually do not want Graphify to index
+# Ignore common junk for Graphify
+.git/
 node_modules/
 dist/
 build/
 coverage/
 .next/
+.nuxt/
 .cache/
-venv/
-.venv/
-vendor/
-.graphify-out/
-graphify-out/cache/
-*.min.js
-*.map
+.env
+.env.*
+*.log
+graphify-out/

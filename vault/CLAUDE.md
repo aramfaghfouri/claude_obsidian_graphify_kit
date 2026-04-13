@@ -1,7 +1,7 @@
 # Obsidian vault operating rules
 
 ## Purpose
-This vault is the central knowledge base for coding, research, decisions, and reusable technical understanding.
+This vault is the central knowledge base for coding, research, decisions, writing drafts, and reusable technical understanding.
 
 The goal is not to store everything.
 The goal is to store useful knowledge in a structured way that stays clean, connected, and easy to navigate as projects grow.
@@ -29,6 +29,11 @@ Do not create isolated notes unless the note is intentionally temporary.
 - `01 Projects/*/Meetings/`
 - `01 Projects/*/Snippets/`
 - `01 Projects/*/Scratch/`
+- `05 Writing/Ideas/`
+- `05 Writing/Drafts/`
+- `05 Writing/In Review/`
+- `05 Writing/Ready to Publish/`
+- `05 Writing/Published/`
 
 ### Protected folders
 Do not write here unless explicitly instructed:
@@ -58,34 +63,39 @@ Every project-specific note should link back to that home note in the `Related` 
 Example:
 - `[[Project Alpha]]`
 
+## Writing structure
+Content meant for publishing later belongs in `05 Writing/`.
+
+Use:
+- `05 Writing/Ideas/` for rough article ideas and outlines
+- `05 Writing/Drafts/` for active drafts
+- `05 Writing/In Review/` for drafts being edited
+- `05 Writing/Ready to Publish/` for nearly final pieces
+- `05 Writing/Published/` for archived published versions with metadata and URLs
+
+Do not store website-bound drafts in `01 Projects/` unless explicitly asked.
+
 ## Naming conventions
 
 ### Research notes
 Format:
 `YYYY-MM-DD topic.md`
 
-Examples:
-- `2026-04-12 OAuth PKCE refresh flow.md`
-- `2026-04-12 Elasticsearch geo query notes.md`
-
 ### Decision notes
 Format:
 `YYYY-MM-DD decision title.md`
-
-Examples:
-- `2026-04-12 Use rotating refresh tokens.md`
-- `2026-04-12 Keep vault separate from code repos.md`
 
 ### Session summaries
 Format:
 `YYYY-MM-DD HHMMSS <Project Name> session.md`
 
-Example:
-- `2026-04-12 183005 Project Alpha session.md`
-
 ### Snippet notes
 Format:
 `YYYY-MM-DD snippet title.md`
+
+### Writing drafts
+Format:
+`YYYY-MM-DD article title.md`
 
 ### Concept notes
 Use short, canonical titles.
@@ -104,6 +114,14 @@ Every note must include frontmatter.
 - `updated`
 - `source_type`
 - `tags`
+
+### Preferred fields for writing notes
+- `type`
+- `status`
+- `publish_target`
+- `slug`
+- `created`
+- `updated`
 
 ## Note types
 
@@ -166,6 +184,22 @@ Required sections:
 - `## Caveats`
 - `## Related`
 
+### Writing draft
+Use for:
+- blog posts
+- essays
+- tutorials
+- technical articles
+- publishable content in progress
+
+Required sections:
+- `## Thesis`
+- `## Audience`
+- `## Outline`
+- `## Draft`
+- `## Supporting notes`
+- `## Related`
+
 ### Concept note
 Use only when explicitly instructed or when promoting a curated note into `02 Concepts/`.
 
@@ -179,17 +213,18 @@ Required sections:
 
 ### Core linking rule
 Every new note must contain at least:
-- one link to its project home note
+- one link to its project home note or writing/supporting note context
 - one link to a related topic, decision, source, snippet, or neighboring note when such a note exists
 
-If no related note exists yet, link only to the project home note and keep the note easy to connect later.
+If no related note exists yet, add the strongest available hub link and keep the note easy to connect later.
 
 ### Project hub rule
 The project home note is the central hub for all project-specific notes.
 Every project-specific note must link back to that hub.
 
-Example:
-- `[[Project Alpha]]`
+### Writing hub rule
+Writing notes should link to the concept, research, or project notes that support them.
+Writing notes should not float as isolated drafts.
 
 ### Linking by note type
 
@@ -200,18 +235,11 @@ Research notes must link to:
 - any decision note created from that research if it exists
 - relevant snippet notes if the note includes implementation details
 
-Research notes should make it clear:
-- what the note is related to
-- what problem it informs
-- what future decision it may affect
-
 #### Decision notes
 Decision notes must link to:
 - the project home note
 - the research note or notes that informed the decision
 - any snippet or implementation note that shows how the decision was applied
-
-A decision note should never exist as an island.
 
 #### Session summaries
 Session summaries must link to:
@@ -220,23 +248,23 @@ Session summaries must link to:
 - any decision notes created during the session
 - any concept note that became relevant during the session
 
-Session summaries are bridge notes between day-to-day work and durable knowledge.
-
 #### Snippet notes
 Snippet notes must link to:
 - the project home note
 - the research or decision note that gives the snippet context
 - related snippets if they solve similar problems
 
-A snippet without context is just code drift.
+#### Writing drafts
+Writing drafts must link to:
+- the concept, project, or research notes that support the article
+- other writing notes only when there is clear editorial value
+- the canonical concept or research note rather than duplicating the same knowledge in the draft
 
 #### Concept notes
 Concept notes in `02 Concepts/` must link to:
 - related concepts
 - the source project notes they were promoted from when relevant
 - decision notes or research notes that show real usage
-
-Concept notes should connect across projects when the concept is reusable.
 
 ## Related section rule
 Every durable note should end with a `## Related` section.
@@ -256,9 +284,8 @@ Do not force links that do not help future retrieval.
 - Decision note: minimum 2 links
 - Session summary: minimum 3 links when applicable
 - Snippet note: minimum 2 links
+- Writing draft: minimum 2 links
 - Concept note: minimum 2 links
-
-One of those links should usually be the project home note unless the note is truly cross-project.
 
 ## Link quality rules
 - Prefer a small number of meaningful links over a large number of weak ones.
@@ -267,14 +294,6 @@ One of those links should usually be the project home note unless the note is tr
 - Link notes because a future reader would actually want to jump there.
 - Use exact note titles when linking.
 - Reuse canonical note names instead of inventing alternate names for the same concept.
-
-### Bad example
-- `[[OAuth Notes]]`
-- `[[OAuth PKCE]]`
-- `[[PKCE Flow]]`
-
-### Good example
-- one canonical note title reused everywhere
 
 ## Tagging rules
 - Use tags sparingly.
@@ -287,6 +306,8 @@ Good examples:
 - `decision`
 - `session`
 - `snippet`
+- `writing`
+- `website`
 
 Do not invent lots of one-off tags.
 
@@ -308,38 +329,18 @@ Before creating a note:
 - Include examples when useful.
 - Include open questions when something remains unresolved.
 
-## Coding knowledge capture rules
-When saving coding knowledge:
-- prefer patterns, gotchas, commands, architecture choices, debugging lessons, and implementation insights
-- do not dump routine implementation chatter
-- do not copy the entire diff into the note unless explicitly asked
-- explain why the change mattered, not only what changed
-
-## Research capture rules
-When saving research:
-- separate facts from opinions
-- separate current conclusion from uncertainty
-- include tradeoffs when comparing approaches
-- include open questions when something is unresolved
-- include examples when useful
+## Writing quality rules
+- Writing drafts are for publishable content, not raw scratch dumps.
+- Keep internal research and outward-facing writing separate.
+- Drafts may summarize internal notes, but should not become a sloppy copy-paste of them.
+- When possible, trace claims in writing drafts back to supporting research or concept notes.
+- Use `05 Writing/Published/` only when the piece is actually published or archived as final.
 
 ## Session summary rules
-Session summaries should be:
-- concise
-- useful
-- retrieval-friendly
-- understandable later without rereading the full conversation
-
-They should mention:
-- what was worked on
-- what changed
-- important decisions
-- open questions
-- next steps
-- the relevant project context
+Session summaries should be concise, useful, retrieval-friendly, and understandable later without rereading the full conversation.
 
 ## Promotion rules
-- Notes written by Claude should normally go to Inbox or project research folders first.
+- Notes written by Claude should normally go to Inbox, project folders, or writing folders first.
 - `02 Concepts/` is curated and should only be written when explicitly asked.
 - When promoting a note from Inbox or Project Research into `02 Concepts/`, preserve links to the original project context where useful.
 - Add links to related concepts when promoting a concept note.
@@ -347,8 +348,8 @@ They should mention:
 
 ## Safe fallback behavior
 If unsure how to connect a note:
-- link it to the project home note
-- add one item under `Open questions` describing what it may need to connect to later
+- link it to the strongest hub note available
+- add one item under `Open questions` or `Supporting notes` describing what it may need to connect to later
 - do not invent weak links just to satisfy the graph
 
 If unsure where to save a note:
@@ -360,23 +361,3 @@ If unsure where to save a note:
 - Never create note sprawl just because information exists.
 - Never create several notes when one structured note would do.
 - When uncertain, choose the safer and simpler option.
-
-## Good examples
-
-### Good research note Related section
-## Related
-- [[Project Alpha]]
-- [[Authentication architecture]]
-- [[Use rotating refresh tokens]]
-
-### Good decision note Related section
-## Related
-- [[Project Alpha]]
-- [[OAuth PKCE refresh flow]]
-- [[Token refresh edge cases]]
-
-### Good session summary Related section
-## Related
-- [[Project Alpha]]
-- [[2026-04-12 OAuth PKCE refresh flow]]
-- [[2026-04-12 Use rotating refresh tokens]]

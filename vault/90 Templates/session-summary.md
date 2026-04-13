@@ -2,8 +2,6 @@
 type: session-summary
 project: __PROJECT_NAME__
 created: {{date}}
-status: inbox
-source_type: claude-code
 tags:
   - session
   - ai/claude

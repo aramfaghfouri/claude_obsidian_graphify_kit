@@ -8,7 +8,7 @@
 - Do not assume project structure without checking the repo first.
 
 ## Coding workflow
-- Preserve existing architecture unless explicitly asked to restructure it.
+- Preserve the existing architecture unless explicitly asked to restructure it.
 - Do not change dependency versions unless asked.
 - Do not rename files, move folders, or refactor large areas unless there is a strong reason and the user asked for it.
 - When changing behavior, update tests if the repo has tests.
@@ -16,7 +16,7 @@
 - For risky work, prefer a branch-first workflow.
 
 ## Working style
-- First understand the local context before editing.
+- Understand the local context before editing.
 - Search before creating duplicates.
 - Make minimal changes that fully solve the task.
 - Keep explanations readable and easy to scan.
@@ -33,22 +33,21 @@
 - Do not paste large source files into the vault unless the code itself is the knowledge artifact.
 - Summarize patterns, decisions, edge cases, and useful snippets instead of dumping noise.
 
-## Obsidian write behavior
+## Obsidian behavior
+- Follow the vault's local `CLAUDE.md` whenever writing to the vault.
 - Default destination for uncertain note placement is `00 Inbox/AI Captures/`.
 - Prefer updating an existing relevant note over creating a duplicate.
 - Do not write to evergreen or curated notes unless explicitly asked.
-- Use the vault's local `CLAUDE.md` rules when writing into the Obsidian vault.
 - When saving a project note, always link it back to the project home note.
+- When saving notes to Obsidian, create meaningful internal links so notes become part of a usable graph.
 
-## Obsidian linking behavior
-- Do not create isolated notes.
-- Every saved note should link to its project home note.
-- Add links to related research, decisions, snippets, or concepts when they already exist.
-- Prefer a few strong links over many weak ones.
-- Update existing notes instead of creating near-duplicates.
+## Writing behavior
+- Content intended for publishing belongs in `05 Writing/`, not in project research folders.
+- Prefer separate writing drafts over turning internal notes into messy article drafts.
+- Link writing drafts to the research or concept notes that support them.
 
 ## Session wrap-up
-- At the end of a meaningful work session, produce a short summary containing:
+- At the end of meaningful work, produce a short summary containing:
   - what was worked on
   - what changed
   - important decisions
@@ -62,10 +61,3 @@
 - Do not use excessive tags.
 - Do not invent folder destinations when the vault rules already define them.
 - Do not write to protected folders unless explicitly instructed.
-
-## Preferred output shape for saved notes
-- Separate facts from decisions.
-- Separate decisions from open questions.
-- Include concrete examples when helpful.
-- Use explicit titles.
-- Keep notes clean enough that they can be reused later without rereading the whole session.

@@ -11,23 +11,23 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "obsidian-config.json"
 
 
-def sanitize_filename(name: str) -> str:
-    name = re.sub(r'[\/:*?"<>|]+', " ", name).strip()
-    name = re.sub(r"\s+", " ", name)
-    return name[:180]
-
-
 def run_obsidian(args: list[str]) -> None:
     subprocess.run(["obsidian"] + args, check=True)
 
 
-def slugify_project(name: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+def slugify(value: str) -> str:
+    value = value.strip().lower()
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    return value.strip("-") or "untitled"
+
+
+def project_tag(project_name: str) -> str:
+    return project_name.lower().replace(" ", "-")
 
 
 def render_note(note_type: str, project_name: str, title: str, body: str) -> str:
     today = datetime.now().strftime("%Y-%m-%d")
-    project_slug = slugify_project(project_name)
+    ptag = project_tag(project_name)
 
     if note_type == "research":
         return f"""---
@@ -39,7 +39,7 @@ created: {today}
 updated: {today}
 tags:
   - ai/claude
-  - project/{project_slug}
+  - project/{ptag}
 ---
 
 # {title}
@@ -68,7 +68,7 @@ created: {today}
 decision_date: {today}
 tags:
   - decision
-  - project/{project_slug}
+  - project/{ptag}
 ---
 
 # {title}
@@ -95,7 +95,7 @@ project: {project_name}
 created: {today}
 tags:
   - snippet
-  - project/{project_slug}
+  - project/{ptag}
 ---
 
 # {title}
@@ -111,12 +111,41 @@ tags:
 ## Related
 - [[{project_name}]]
 """
+    if note_type == "writing":
+        return f"""---
+type: writing
+status: draft
+publish_target: website
+slug: {slugify(title)}
+created: {today}
+updated: {today}
+tags:
+  - writing
+  - website
+---
+
+# {title}
+
+## Thesis
+
+{body}
+
+## Audience
+
+## Outline
+
+## Draft
+
+## Supporting notes
+
+## Related
+"""
     raise ValueError(f"Unsupported note_type: {note_type}")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--type", required=True, choices=["research", "decision", "snippet"])
+    parser.add_argument("--type", required=True, choices=["research", "decision", "snippet", "writing"])
     parser.add_argument("--title", required=True)
     parser.add_argument("--stdin-body", action="store_true")
     args = parser.parse_args()
@@ -129,11 +158,13 @@ def main() -> int:
         "research": config["folders"]["research"],
         "decision": config["folders"]["decisions"],
         "snippet": config["folders"]["snippets"],
+        "writing": config["folders"]["writing_drafts"],
     }
 
     body = sys.stdin.read().strip() if args.stdin_body else ""
     today = datetime.now().strftime("%Y-%m-%d")
-    file_name = f"{today} {sanitize_filename(args.title)}.md"
+    safe_title = re.sub(r'[\\/:*?"<>|]+', "-", args.title).strip()
+    file_name = f"{today} {safe_title}.md"
     note_path = f"{folder_map[args.type]}/{file_name}"
 
     content = render_note(args.type, project_name, args.title, body)
@@ -142,7 +173,7 @@ def main() -> int:
         f"vault={vault_name}",
         "create",
         f"path={note_path}",
-        f"content={content}"
+        f"content={content}",
     ])
 
     print(note_path)

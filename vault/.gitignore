@@ -2,16 +2,9 @@
 .DS_Store
 Thumbs.db
 
-# Local trash
-.trash/
-
-# Obsidian local workspace state
+# Obsidian local noise
 .obsidian/workspace.json
 .obsidian/workspaces.json
-
-# Local cache / transient files
-.obsidian/cache/
+.obsidian/cache
 .obsidian/cache/*
-
-# Some plugins write local-only state here
-.obsidian/plugins/*/data.json
+.trash/

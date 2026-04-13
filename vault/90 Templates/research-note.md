@@ -7,7 +7,7 @@ created: {{date}}
 updated: {{date}}
 tags:
   - ai/claude
-  - project/__PROJECT_SLUG__
+  - project/__project-name-slug__
 ---
 
 # {{title}}

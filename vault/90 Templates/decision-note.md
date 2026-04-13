@@ -6,7 +6,7 @@ created: {{date}}
 decision_date: {{date}}
 tags:
   - decision
-  - project/__PROJECT_SLUG__
+  - project/__project-name-slug__
 ---
 
 # {{title}}

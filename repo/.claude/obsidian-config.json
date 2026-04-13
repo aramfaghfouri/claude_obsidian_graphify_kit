@@ -5,7 +5,8 @@
     "session_summaries": "00 Inbox/Session Summaries",
     "research": "01 Projects/__PROJECT_NAME__/Research",
     "decisions": "01 Projects/__PROJECT_NAME__/Decisions",
-    "snippets": "01 Projects/__PROJECT_NAME__/Snippets"
+    "snippets": "01 Projects/__PROJECT_NAME__/Snippets",
+    "writing_drafts": "05 Writing/Drafts"
   },
   "daily_note_enabled": true
 }
